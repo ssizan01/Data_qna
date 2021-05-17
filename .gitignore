@@ -6,9 +6,9 @@ __pycache__/
 
 .env
 .venv
-*.json
 data_qna.py
 /src/somewhat_working.py
 /salah-test.py
 /src/test.py
 /venv/
+/secrets/argolis-test-service-account-project-owner.json
