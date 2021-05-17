@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: data-qna-demo-container
+    volumes:
+      - ./src:/src
+      - ./secrets:/secrets
+    ports:
+      - "8501:8501"

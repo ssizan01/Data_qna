@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+.env
+.venv
+*.json
+data_qna.py
+/src/somewhat_working.py
+/salah-test.py
+/src/test.py
+/venv/
