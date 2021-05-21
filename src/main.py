@@ -102,7 +102,7 @@ def get_text():
 
 
 st.title("""
-Data qna chat test 
+Data Qna Demo
 """)
 
 st.write(f"Your current selected DataSet is {dataset_name}")
