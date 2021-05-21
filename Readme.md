@@ -10,4 +10,5 @@ This is a simple BigQuery DataQna demo that showcases the power of natural langu
 * Type `http://localhost:8501/` on your browser to start interacting with the demo
 
 ##Screenshot
+
 ![alt text](Data_qna_demo_image.png?raw=true)
