@@ -9,6 +9,6 @@ This is a simple BigQuery DataQna demo that showcases the power of natural langu
 * Make sure you have docker installed on your machine. While in the root directory of this project, type `docker-compose up` to build the docker container.
 * Type `http://localhost:8501/` on your browser to start interacting with the demo
 
-##Screenshot
+## Screenshot
 
 ![alt text](Data_qna_demo_image.png?raw=true)
