@@ -129,22 +129,22 @@ def main():
         except:
             st.error(f'Please enter a valid question for the selected Dataset')
 
-from SessionState import get
+# from SessionState import get
+#
+# session_state = get(password='')
+# print(f' session pass is {session_state.password}')
+# if session_state.password != 'pwd123':
+#     pwd_placeholder = st.sidebar.empty()
+#     pwd = pwd_placeholder.text_input("Password:", value="", type="password")
+#     session_state.password = pwd
+#     if session_state.password == 'pwd123':
+#         pwd_placeholder.empty()
+#         main()
+#     elif session_state.password != '':
+#         st.error("the password you entered is incorrect")
+#
+# else:
+#     main()
 
-session_state = get(password='')
-print(f' session pass is {session_state.password}')
-if session_state.password != 'pwd123':
-    pwd_placeholder = st.sidebar.empty()
-    pwd = pwd_placeholder.text_input("Password:", value="", type="password")
-    session_state.password = pwd
-    if session_state.password == 'pwd123':
-        pwd_placeholder.empty()
-        main()
-    elif session_state.password != '':
-        st.error("the password you entered is incorrect")
 
-else:
-    main()
-
-
-
+main()
