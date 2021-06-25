@@ -24,8 +24,8 @@ dataset_name = st.sidebar.selectbox(
 )
 
 # Initialize the clients
-
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = glob(str(secrets_path) + "/*.json")[0]
+#print(glob(str(secrets_path) + "/*.json")[1])
 location = "us"  # "us" or "eu"
 client_options = ClientOptions(api_endpoint=f"{location}-dataqna.googleapis.com:443")
 suggest_client = AutoSuggestionServiceClient(client_options=client_options)
@@ -40,7 +40,7 @@ def get_df_from_question(user_input):
     question = Question(scopes=[table_dic[dataset_name]], query=user_input)
     question_response = questions_client.create_question(parent=parent, question=question)
     question_resouce_url = question_response.name + "/userFeedback"
-    print(question_resouce_url)
+    #print(question_resouce_url)
     plain_english_interpretation = question_response.interpretations[0].human_readable.generated_interpretation.text_formatted
     raw_sql = question_response.interpretations[0].data_query.sql
     sql_query = question_response.interpretations[0].data_query.sql.replace('\n', ' ')
@@ -75,7 +75,7 @@ def main():
     Data qna chat test 
     """)
 
-    st.write(f"Your current selected DataSet is {dataset_name}")
+    st.write(f"Your current selected DataSet is **{dataset_name}**")
 
     user_input = get_text()
     #print(f'user input is {user_input}')
@@ -83,7 +83,11 @@ def main():
 
     generate_suggestion = st.button('Generate Suggestion', key=1)
     if generate_suggestion:
-        user_input = st.text_input('Suggested Query is:', value=get_suggestions(user_input=user_input)[0], key=1)
+        print(f'length of suggestion list is {len(get_suggestions(user_input=user_input))}')
+        try:
+            user_input = st.text_input('Suggested Query is:', value=get_suggestions(user_input=user_input)[0], key=1)
+        except:
+            st.error(f'Cannot generate a suggestion. Please try something else.')
 
     #suggested_query = st.selectbox('You can also pick a query from the suggestions list', suggestions_list )
     #marked_down_df = dataframe.to_markdown()
@@ -127,7 +131,7 @@ def main():
                 questions_client.update_user_feedback(request=UpdateUserFeedbackRequest(user_feedback=user_feedback,update_mask={'paths': ["rating","free_form_feedback"]}))
 
         except:
-            st.error(f'Please enter a valid question for the selected Dataset')
+            st.error(f'Please enter a valid question for the selected Dataset or try to generate a suggestion.')
 
 # from SessionState import get
 #

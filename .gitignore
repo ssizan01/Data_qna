@@ -12,3 +12,4 @@ data_qna.py
 /src/test.py
 /venv/
 /secrets/argolis-test-service-account-project-owner.json
+/secrets/bigquery-data-qna-webapp-demo-sa.json
