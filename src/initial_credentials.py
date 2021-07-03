@@ -1,6 +1,5 @@
 # Initialize the clients
 import os
-#import streamlit as st
 from google.api_core.client_options import ClientOptions
 from google.cloud import bigquery
 from google.cloud.dataqna import AutoSuggestionServiceClient, Question, QuestionServiceClient, SuggestQueriesRequest, UpdateUserFeedbackRequest, UserFeedback
@@ -8,7 +7,7 @@ from google.cloud import bigquery_storage
 from config import project_name,tables_list
 from pathlib import Path
 from glob import glob
-#import altair as alt
+
 
 base_path = Path(__file__).parent
 secrets_path = (base_path / "../secrets").resolve()

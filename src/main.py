@@ -1,17 +1,8 @@
-#import os
 import streamlit as st
-# from google.api_core.client_options import ClientOptions
-# from google.cloud import bigquery
-# from google.cloud.dataqna import AutoSuggestionServiceClient, Question, QuestionServiceClient, SuggestQueriesRequest, UpdateUserFeedbackRequest, UserFeedback
-# from google.cloud import bigquery_storage
-# from config import project_name,tables_list
-# from pathlib import Path
-# from glob import glob
 import altair as alt
 from initial_credentials import *
 
-# base_path = Path(__file__).parent
-# secrets_path = (base_path / "../secrets").resolve()
+
 
 
 table_dic ={}
@@ -23,17 +14,6 @@ dataset_name = st.sidebar.selectbox(
     'Select Dataset',
     list(table_dic.keys())
 )
-
-# # Initialize the clients
-# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = glob(str(secrets_path) + "/*.json")[0]
-# #print(glob(str(secrets_path) + "/*.json")[1])
-# location = "us"  # "us" or "eu"
-# client_options = ClientOptions(api_endpoint=f"{location}-dataqna.googleapis.com:443")
-# suggest_client = AutoSuggestionServiceClient(client_options=client_options)
-# questions_client = QuestionServiceClient(client_options=client_options)
-# bq_client = bigquery.Client()
-# bqstorageclient = bigquery_storage.BigQueryReadClient()
-# parent = questions_client.common_location_path(project_name, location)
 
 
 #@st.cache()
@@ -68,12 +48,12 @@ def get_suggestions(user_input):
 
 
 def get_text():
-    input_text = st.text_input("Type in your question here:")
+    input_text = st.text_input("Type in your question here or pick a question from suggested queries:")
     return input_text
 
 def main():
     st.title("""
-    Data qna chat test 
+    Data Qna WebApp Demo
     """)
 
     st.write(f"Your current selected DataSet is **{dataset_name}**")
@@ -82,15 +62,18 @@ def main():
     #print(f'user input is {user_input}')
     #suggestions_list = get_suggestions(user_input=user_input)
 
-    generate_suggestion = st.button('Generate Suggestion', key=1)
-    if generate_suggestion:
-        print(f'length of suggestion list is {len(get_suggestions(user_input=user_input))}')
-        try:
-            user_input = st.text_input('Suggested Query is:', value=get_suggestions(user_input=user_input)[0], key=1)
-        except:
-            st.error(f'Cannot generate a suggestion. Please try something else.')
+    # generate_suggestion = st.button('Generate Suggestion', key=1)
+    # if generate_suggestion:
+    #     print(f'length of suggestion list is {len(get_suggestions(user_input=user_input))}')
+    #     try:
+    #         user_input = st.text_input('Suggested Query is:', value=get_suggestions(user_input=user_input)[0], key=1)
+    #     except:
+    #         st.error(f'Cannot generate a suggestion. Please try something else.')
 
-    #suggested_query = st.selectbox('You can also pick a query from the suggestions list', suggestions_list )
+    st.write(get_suggestions(user_input=''))
+    # suggested_query = st.selectbox('You can also pick a query from the suggestions list', suggestions_list )
+    # if suggested_query:
+    #     user_input = suggested_query
     #marked_down_df = dataframe.to_markdown()
 
     if user_input == '':
@@ -132,7 +115,7 @@ def main():
                 questions_client.update_user_feedback(request=UpdateUserFeedbackRequest(user_feedback=user_feedback,update_mask={'paths': ["rating","free_form_feedback"]}))
 
         except:
-            st.error(f'Please enter a valid question for the selected Dataset or try to generate a suggestion.')
+            st.error(f'Please enter a valid question for the selected Dataset or pick a question from suggested queries.')
 
 # from SessionState import get
 #
@@ -151,6 +134,6 @@ def main():
 # else:
 #     main()
 
-
-
+# from importlib.metadata import version
+# print(version('streamlit'))
 main()
