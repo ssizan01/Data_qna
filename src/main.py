@@ -53,7 +53,7 @@ def get_text():
 
 def main():
     st.title("""
-    Data Qna WebApp Demo
+    BigQuery Data QnA Web App Demo
     """)
 
     st.write(f"Your current selected DataSet is **{dataset_name}**")
