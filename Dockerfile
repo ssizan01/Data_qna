@@ -1,5 +1,5 @@
 FROM python:3.9-slim
-
+EXPOSE 8080
 ENV PYTHONUNBUFFERED 1
 ENV APP_DIR /src
 ENV SECRETS_DIR /secrets
@@ -14,4 +14,4 @@ COPY src $APP_DIR
 COPY secrets $SECRETS_DIR
 
 
-CMD streamlit run main.py
+CMD streamlit run main.py --server.port 8080
