@@ -10,6 +10,7 @@ google-crc32c==1.1.2
 google-resumable-media==1.2.0
 googleapis-common-protos==1.53.0
 pandas==1.2.4
+pandas-gbq==0.14.1
 pyarrow==3.0.0
 matplotlib==3.4.1
 altair==4.1.0

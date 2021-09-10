@@ -1,13 +1,12 @@
 import streamlit as st
 import altair as alt
+import pandas as pd
 from initial_credentials import *
-
-
 
 
 table_dic ={}
 for item in tables_list:
-    table_dic[item.partition('.')[2]] = f"//bigquery.googleapis.com/projects/{project_name}/datasets/{item.partition('.')[0]}/tables/{item.partition('.')[2]}"
+    table_dic[item] = f"//bigquery.googleapis.com/projects/{project_name}/datasets/{item.partition('.')[0]}/tables/{item.partition('.')[2]}"
 
 
 dataset_name = st.sidebar.selectbox(
@@ -57,6 +56,16 @@ def main():
     """)
 
     st.write(f"Your current selected DataSet is **{dataset_name}**")
+    st.write(f"Following is a preview of **{dataset_name}**. Use horizontal scrollbar to the explore the dataset to the right")
+
+    ## Connect to BQ
+    table_name = '`'+ project_name+ '.'+ dataset_name+ '`'
+
+    query = f'SELECT * FROM {table_name} limit 3'
+
+    table_preview = pd.read_gbq(query, project_id=project_name, dialect='standard')
+
+    table_preview
 
     user_input = get_text()
     #print(f'user input is {user_input}')
@@ -117,23 +126,5 @@ def main():
         except:
             st.error(f'Please enter a valid question for the selected Dataset or pick a question from suggested queries.')
 
-# from SessionState import get
-#
-# session_state = get(password='')
-# print(f' session pass is {session_state.password}')
-# if session_state.password != 'pwd123':
-#     pwd_placeholder = st.sidebar.empty()
-#     pwd = pwd_placeholder.text_input("Password:", value="", type="password")
-#     session_state.password = pwd
-#     if session_state.password == 'pwd123':
-#         pwd_placeholder.empty()
-#         main()
-#     elif session_state.password != '':
-#         st.error("the password you entered is incorrect")
-#
-# else:
-#     main()
 
-# from importlib.metadata import version
-# print(version('streamlit'))
 main()
